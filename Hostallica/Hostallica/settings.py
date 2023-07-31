@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-2xf^-gt=+aa!v@(b^f9)=pyoi9hc@=w!tcw9fa((lircj_d%19
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hostallica-71b670ea65e3.herokuapp.com','127.0.0.1','hostallica.pythonanywhere.com']
+ALLOWED_HOSTS = ['hostallica-71b670ea65e3.herokuapp.com','hostallica.pythonanywhere.com']
 
 
 # Application definition
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend',
     'django_cron',
-    #'chat',
+
 
 
     #third party apps
@@ -104,12 +104,12 @@ WSGI_APPLICATION = 'Hostallica.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-     #'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 
-     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    #  'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 
 }
 
