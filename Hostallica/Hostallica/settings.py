@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-2xf^-gt=+aa!v@(b^f9)=pyoi9hc@=w!tcw9fa((lircj_d%19
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hostallica-71b670ea65e3.herokuapp.com','hostallica.pythonanywhere.com']
+ALLOWED_HOSTS = ['hostallica-45f6902a98fc.herokuapp.com','hostallica.pythonanywhere.com']
 
 
 # Application definition
