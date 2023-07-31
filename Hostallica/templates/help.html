@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link href="{% static 'css/help.css' %}" rel="stylesheet" type="text/css">
+<style type="text/css">
+  body {
+    background-image: url({% static 'SchoolImages/MainImages/Roombooking.png' %});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+  }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="help-container">
+        <div class="help-title text-danger">Help Desk</div>
+        <div class="help-text text-danger text-center"><i class="fa fa-envelope mr-2"></i> info@hostallica.com
+          <br><i class="fas fa-phone mr-2"></i> 0248587648</div>
+
+        <div class="row help-details translucent-container">
+          <div class="col-lg-4 col-md-12 my-2">
+            <div class="help-details-title">STEPS TO BOOK ROOM</div>
+            <div class="help-details-text">
+              To book a room, go to the book room page. This can be accessed by clicking on the book room link on the home
+              page.
+              <br>
+              1. Select the hall of preference
+              <br>
+              2. Select the floor and room preferred. Make sure to confirm the booking and proceed to the payment page.
+              <br>
+              3. Payments can be made based on the provided options.
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-12 my-2">
+            <div class="help-details-title">ROOM DETAILS</div>
+            <div class="help-details-text">
+              The room details help you know your roommates. This section has all details about your roommates, their
+              program of study, and contact information.
+              <br><br>
+              You can also cancel your room over here.
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-12 my-2">
+            <div class="help-details-title text-danger">WARNING</div>
+            <div class="help-details-text">
+              Payments are not refundable.
+              <br><br>
+              Rooms would be lost after the 48 hours of the grace period.
+              <br><br>
+              Rooms canceled would attract a fee of Gh50 on the next booking.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

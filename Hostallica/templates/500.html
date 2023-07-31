@@ -1,0 +1,34 @@
+
+
+  {% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div style="width: 100%; height: 100vh; position: relative; background: white">
+
+    <div style="width: 100%; height: 100vh; position: relative; background: white">
+        <div style="width: 382px; left: 50%; top: 50%; transform: translate(-50%, -50%); position: absolute; flex-direction: column; justify-content: flex-start; align-items: center; gap: 80px; display: inline-flex; background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(33, 43, 54, 0.1)">
+          <div style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 16px; display: flex">
+            <div style="text-align: center; color: #212B36; font-size: 32px; font-family: Public Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">500 Internal Server Error</div>
+            <div style="text-align: center; color: #637381; font-size: 16px; font-family: Public Sans; font-weight: 400; line-height: 24px; word-wrap: break-word">There was an error, please try again later.</div>
+          </div>
+          <div style="width: 346.67px; height: 260px; position: relative">
+            <div style="width: 346.67px; height: 260px; left: 0px; top: 0px; position: absolute; opacity: 0.20; justify-content: center; align-items: center; display: inline-flex">
+              <div style="width: 346.67px; height: 260px; background: linear-gradient(31deg, #00AB55 0%, rgba(0, 171, 85, 0) 100%)"></div>
+            </div>
+            <div style="width: 153.42px; height: 158.89px; left: 43.33px; top: 50.56px; position: absolute">
+              <!-- Your other elements here -->
+            </div>
+           
+          </div>
+          <div style="padding: 11px 22px; background: #00AB55; box-shadow: 0px 8px 16px rgba(0, 171, 85, 0.24); border-radius: 8px; justify-content: center; align-items: center; display: inline-flex">
+            <a href="{% url 'index' %}" style="color: white; font-size: 15px; font-family: Public Sans; font-weight: 700; line-height: 26px; word-wrap: break-word; text-decoration: none;">Go to Home</a>
+          </div>
+        </div>
+        
+      </div>
+      
+
+</div>
+{% endblock %}

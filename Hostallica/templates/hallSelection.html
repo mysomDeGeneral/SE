@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<style type="text/css">
+    body{
+        background-image:url({% static 'SchoolImages/MainImages/Roombooking.png' %});
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+    
+    }
+
+    {% comment %} body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 160vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+      }
+     {% endcomment %}
+
+    
+</style>
+
+<link rel="stylesheet" href="{% static 'css/HallSelection.css' %}">
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+ 
+ <div class=" container">
+
+
+
+    <div class="row row-cols-md-2 row-cols-xl-3 g-4">
+        {% for hall in halls %}
+        <div class="col-lg-4 col-sm-12 col-md-6">
+            <div class="col1">
+                <a href="{% url 'rooms' hall.id %}">
+                            <div class="sub-img">
+                                {% if hall.image %}
+                                <img src="{{ hall.image.url }}" alt="">
+                                {% else %}
+                                <img src="#" alt="Hall Image">
+                                {%endif%}
+                                <p class="names text-align-right">{{ hall.name }}</p>
+                            </div>
+
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+      
+
+</div>
+  
+
+{% endblock %}

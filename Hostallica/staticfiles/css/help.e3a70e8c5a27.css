@@ -1,0 +1,41 @@
+.help-container {
+    padding: 20px;
+  }
+
+  .help-title {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .help-text {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .help-details {
+    margin-top: 30px;
+    border-top: 1px solid white;
+    padding-top: 20px;
+  }
+
+  .help-details-title {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .help-details-text {
+    color: white;
+    font-size: 16px;
+  }
+
+  .translucent-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+  }

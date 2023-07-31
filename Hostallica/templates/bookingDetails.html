@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="#">
+<style type='text/css'>
+  body {
+    background-image: url({% static 'SchoolImages/MainImages/Roombooking.png' %});
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .info{
+    display: flex; 
+    flex-direction: column;
+    font-weight: bold;
+  }
+
+  {% comment %} .wrapper {
+    flex: 1;
+  }
+
+  .center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  } {% endcomment %}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    
+  <!-- Display details of the room booked -->
+  {% if booking %}
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-4 col-sm-12">
+      <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between">
+          Room {{booking.room.room_number}}
+          {% if booking.paid %}
+          <a href="#" class="btn btn-success">PAID</a>
+          {% else %}
+          <a href="#" data-bs-toggle="modal" data-bs-target="#cancelModal" class="btn btn-danger">Cancel</a>
+          {% endif %}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between">{{booking.hall}} Hall
+            {% if not booking.paid %}
+            <form action="{% url 'charge' %}" method="POST">
+              {% csrf_token %}
+              <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ key }}"
+                data-amount="{{ booking.room.price }}"
+                data-name="Payment Gateway"
+                data-description="Payment Gateway"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto">
+              </script>
+            </form>
+            {% endif %}
+          </li>
+          <li class="list-group-item">{{booking.room.type}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+  {%else %}
+  <div class="container" style="min-height: 100%; display: flex; flex-direction: column;">
+    <div class="row justify-content-center align-items-center flex-grow-1">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <p class="text-center text-danger fs-1">No booking found for user</p>
+        </div>
+    </div>
+  </div>
+  {% endif%}
+
+
+  <!-- Display details of available students in the room -->
+  {% if booking %}
+    <div class="center-text">
+      {% if booking.paid %}
+      <div class="container">
+        <table class="table table-striped table-hover table-bordered my-5">
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Program</th>
+            </tr>
+            {% for booking in bookings %}
+            <tr>
+              <td>{{ booking.student.name }}</td>
+              <td>{{ booking.student.phone }}</td>
+              <td>{{ booking.student.program }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="container info mb-5">
+        <div class="row justify-content-center align-items-center flex-grow-1">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <p class="text-center text-danger fs-1">Proceed to payment</p>
+            </div>
+        </div>
+      </div>
+          {% endif %}
+    </div>
+    {% endif %}
+
+
+    
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+/* HALL SELECTION */
+body{
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+}
+
+h1 {
+    color: #000;
+    font-family: Inter;
+    font-size: auto;
+    font-style:inherit;
+    font-weight: 600;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.header img {
+    margin-right: 17px;
+    height: 5rem;
+    margin-top: 2rem;
+}
+.container a{
+    text-decoration: none;
+    color: black;
+}
+.top{
+    
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.logo{
+    height: 60px;
+    width: 60px;
+  }
+.row{
+    margin: 2rem 0 0 0;
+}
+.sub-img img{
+    width: 53%;
+    height: 170px;
+    flex-shrink: 0;
+    border-radius: 6px 0px 0px 6px;
+}
+.sub-img{
+    width: 305px;
+    height: 170px;
+    flex-shrink: 0;
+    margin: 3rem 0rem 3rem 4rem;
+    background-color: #D9D9D9;
+    border-radius: 6px;
+}
+.sub-img p{
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 4rem;
+    position: relative;
+    bottom: 100px;
+    left: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sub-img:hover{
+    box-shadow: 2px 8px 10px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(24, 23, 23, 0.2);
+    transition: all .2s ease-in;
+}
+
+@media screen and (max-width: 480px) {
+    .sub-img{
+        width: 80%;
+        height: 12rem;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sub-img img{
+        width: 50%;
+        height: 12rem;
+        flex-shrink: 0;
+        border-radius: 6px 0px 0px 6px;
+    }
+  }

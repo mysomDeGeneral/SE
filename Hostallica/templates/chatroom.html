@@ -1,0 +1,204 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block styles %}
+
+    <style>
+
+        .vertical-center {
+            height:100%;
+            width:100%;
+          
+            text-align: center;  
+            font: 0/0 a;         
+          
+          .vertical-center:before {   
+            display: inline-block;
+            vertical-align: middle; 
+            height: 100%;
+          }
+          
+          .vertical-center  .container {
+            max-width: 100%;
+          
+            display: inline-block;
+            vertical-align: middle; 
+                                     
+            font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+          }
+
+            .student-image {
+                width: 100px; 
+                height: 100px; 
+                border-radius: 50%;
+                object-fit: cover; 
+            }
+    
+        
+
+        </style>
+     
+ <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron vertical-center">
+<div class="container my-5">
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card chat-app">
+            <div id="plist" class="people-list">
+                <ul class="list-unstyled chat-list mt-2 mb-0">
+                   {% comment %}  {% endcomment %}
+                   {% for student in students %}
+                    <li class="clearfix">
+                        {% if student.picture %}
+                        <img src="{{student.picture.url}}" class="" alt="avatar">
+                        {% else %}
+                        <img src="{% static 'SchoolImages/MainImages/profile.png' %}" class="student-image"  alt="Avatar" >
+
+                        {% endif%}
+                        <a href="#" class="d-inline-block ml-2">{{student.name}}</a>
+                         
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="chat">
+                <div class="chat-header clearfix">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                <img src="{{user.picture.url}}" alt="avatar"><h3 class="d-inline-block ml-2">{{user.name}}</h3>
+                            </a>
+                        
+                        </div>
+                        <div class="col-lg-6 hidden-sm text-right">
+                            <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-history">
+                    <ul class="m-b-0 "id="chat-log">
+                        
+                    </ul>
+                </div>
+
+               
+                
+
+                <form id="chat-form">
+                    {% csrf_token %}
+                    <input type="hidden" class="form-control" name="student" id="student" value="{{student}}">
+                    <input type="hidden" class="form-control" name="room" id="room" value="{{room}}">
+                    <div class="chat-message clearfix">
+                        <div class="input-group mb-0">
+                            
+                            <input type="text" class="form-control" name="message" id="message" placeholder="Enter text here...">
+                            {% comment %} <input type="submit" class="btn btn-primary"> {% endcomment %}
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                          
+                        </div>
+                    </div>
+                </form>
+                
+               
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+
+<script>
+    $(document).ready(function() {
+        setInterval(function() {
+            $.ajax({
+                type: 'GET',
+                url: '{% url "getMessages" %}',
+                success: function(response) {
+                    $('#chat-log').empty();
+                    for (var key in response.messages) {
+                        var messageData = response.messages[key];
+                        var time = messageData.date;
+                        var content = messageData.value;
+                        var sender = messageData.student; 
+
+                        var senderClass = (sender === "{{ user.name }}") ? "right" : "left"; 
+
+                        var messageElement = `
+                            <li class="clearfix">
+                                <div class="message-data ${senderClass}">
+                                    <span class="message-data-time">${time}</span>
+                                    <img src="{{sender.picture.url}}" alt="avatar">
+                                    <span class="message-data-name">${sender}</span>
+                                </div>
+                                <div class="message ${senderClass}">${content}</div>
+                            </li>
+                        `;
+
+                        $('#chat-log').append(messageElement);
+                    }
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log(xhr.status + ':' + xhr.responseText);
+                }
+            });
+        }, 1000);
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).on('submit', '#chat-form', function(e) {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        // Get form data and send it via AJAX
+        $.ajax({
+            type: 'POST',
+            url: '{% url "send" %}',
+            data: {
+                message: $('#message').val(),
+                student: $('#student').val(),
+                room: $('#room').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        
+            },
+            success: function(json) {
+                // Clear the input field after successful submission
+                $('#message').val('');
+
+               
+    
+
+                document.getElementById('chat-log').scrollTop = document.getElementById('chat-log').scrollHeight;
+            },
+            error: function(xhr, errmsg, err) {
+                console.log(xhr.status + ':' + xhr.responseText);
+            }
+        });
+    });
+</script>
+
+
+{% endblock %}
+
+
+
+
+
